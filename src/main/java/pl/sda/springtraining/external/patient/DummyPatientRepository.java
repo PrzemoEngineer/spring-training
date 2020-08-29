@@ -34,7 +34,9 @@ public class DummyPatientRepository implements PatientRepository {
 
     @Override
     public Optional<Patient> getOne(int id) {
-        return patients.stream().filter(pat -> pat.getId().equals(id)).findFirst();
+        return patients.stream()
+                .filter(pat -> pat.getId().equals(id))
+                .findFirst();
 
     }
 
@@ -45,6 +47,8 @@ public class DummyPatientRepository implements PatientRepository {
 
     @Override
     public Optional<Patient> getByInsuranceNo(String insuranceNo) {
-        return patients.stream().filter(pat -> pat.getId().equals(Integer.parseInt(insuranceNo))).findFirst();
+        return patients.stream()
+                .filter(pat -> pat.getInsuranceNo().equals(insuranceNo))
+                .findFirst();
     }
 }

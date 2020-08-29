@@ -18,7 +18,8 @@ public class PatientService {
 
     public void create(Patient patient) {
         repository.getByInsuranceNo(patient.getInsuranceNo())
-                .ifPresent(pat -> {throw new IllegalStateException("Patient with same insuranceNo already exists");});
+                .ifPresent(pat ->
+                    {throw new IllegalStateException("Patient with same insuranceNo already exists");});
 
         repository.create(patient);
     }
