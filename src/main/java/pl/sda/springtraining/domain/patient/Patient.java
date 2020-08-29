@@ -15,15 +15,15 @@ public class Patient {
         return id;
     }
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public String getSurname() {
-//        return surname;
-//    }
-//
-//    public String getInsuranceNo() {
-//        return insuranceNo;
-//    }
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getInsuranceNo() {
+        return insuranceNo;
+    }
 }

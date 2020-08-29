@@ -9,7 +9,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PatientService {
 
-    private final PatientRepository repository;
+    private final PatientRepository repository; // loose coupling - poczytać
 
 //    @Autowired //- ten sam efekt co adnotacja @RequiredArgsConstructor przy klasie
 //    public PatientService(PatientRepository repository) {
