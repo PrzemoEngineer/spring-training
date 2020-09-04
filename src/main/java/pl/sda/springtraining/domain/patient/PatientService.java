@@ -34,7 +34,7 @@ public class PatientService {
     }
 
     public Patient getOne(Integer id) {
-        return repository.getOne(id)
+        return repository.getDoctorByID(id)
                 .orElseThrow(() -> new IllegalArgumentException("Patient with given id not exists"));
     }
 

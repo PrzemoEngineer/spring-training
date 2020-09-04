@@ -11,7 +11,7 @@ public interface PatientRepository {
 
     void delete(int id);
 
-    Optional<Patient> getOne(int id);
+    Optional<Patient> getDoctorByID(int id);
 
     List<Patient> getAll();
 

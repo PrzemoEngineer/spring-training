@@ -1,7 +1,6 @@
 package pl.sda.springtraining.external.patient;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 import pl.sda.springtraining.domain.patient.Patient;
 import pl.sda.springtraining.domain.patient.PatientRepository;
@@ -43,29 +42,27 @@ public class DatabasePatientRepository implements PatientRepository {
     }
 
     @Override
-    public Optional<Patient> getOne(int id) {
+    public Optional<Patient> getDoctorByID(int id) {
         return patientRepository.findById(id)
-                .map(ent -> new Patient(ent.getId(), ent.getName(),
-                        ent.getSurname(), ent.getInsuranceNo()));
+                .map(mapToDomain());
     }
 
     @Override
     public List<Patient> getAll() {
         return patientRepository.findAll()
                 .stream()
-                .map(ent -> new Patient(ent.getId(), ent.getName(),
-                        ent.getSurname(), ent.getInsuranceNo()))
+                .map(mapToDomain())
                 .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Patient> getByInsuranceNo(String insuranceNo) {
         return patientRepository.findByInsuranceNo(insuranceNo)
-                .map(ent -> new Patient(ent.getId(), ent.getName(),
-                    ent.getSurname(), ent.getInsuranceNo()));
+                .map(mapToDomain());
     }
 
-//    private Function<PatientEntity, Patient> mapToDomain() {
-//
-//    }
+    private Function<PatientEntity, Patient> mapToDomain() {
+        return ent -> new Patient(ent.getId(), ent.getName(),
+                ent.getSurname(), ent.getInsuranceNo());
+    }
 }
