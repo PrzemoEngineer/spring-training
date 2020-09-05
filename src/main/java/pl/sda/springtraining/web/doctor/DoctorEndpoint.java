@@ -2,11 +2,15 @@ package pl.sda.springtraining.web.doctor;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.springtraining.domain.doctor.Doctor;
 import pl.sda.springtraining.domain.doctor.DoctorService;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/doctor")
@@ -20,10 +24,24 @@ public class DoctorEndpoint {
         return doctorService.findByParams(searchParams);
     }
 
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.CREATED)
+//    void createDoctor(@RequestBody Doctor doctor) {
+//        doctorService.create(doctor);
+//    }
+
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    void createDoctor(@RequestBody Doctor doctor) {
-        doctorService.create(doctor);
+    ResponseEntity createDoctor(@RequestBody @Valid Doctor doctor, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<String> errMsgs = bindingResult.getAllErrors().stream()
+                .map(err -> err.getDefaultMessage())
+                .collect(Collectors.toList());
+            return ResponseEntity.status(400).body(errMsgs);
+
+        }else {
+            doctorService.create(doctor);
+            return ResponseEntity.status(201).build();
+        }
     }
 
     @PutMapping

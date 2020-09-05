@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.sda.springtraining.domain.visit.Visit;
 import pl.sda.springtraining.domain.visit.VisitService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/visit")
 @RequiredArgsConstructor
@@ -15,7 +17,14 @@ public class VisitEndpoint {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    void createVisit(@RequestBody Visit visit) {
+    void createVisit(@RequestBody @Valid Visit visit) {
         visitService.create(visit);
     }
+
+//    {"roomNumber": "1",
+//    "visitDate" : "2020-09-10",
+//        hour
+//        patient
+//        doctor
+//    }
 }
