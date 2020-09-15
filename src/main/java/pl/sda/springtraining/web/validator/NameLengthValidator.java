@@ -10,8 +10,8 @@ import javax.validation.ConstraintValidatorContext;
 public class NameLengthValidator implements ConstraintValidator<NameLength, Patient> {
     @Override
     public boolean isValid(Patient patient, ConstraintValidatorContext context) {
-        String nameAndSurname = patient.getName().concat(patient.getSurname());
-        return nameAndSurname.length() > 50
+        String nameAndSurname = patient.getName() + patient.getSurname();
+        return nameAndSurname.length() < 50
                 && Strings.isNotBlank(patient.getName())
                 && Strings.isNotBlank(patient.getSurname());
     }

@@ -2,6 +2,7 @@ package pl.sda.springtraining.domain.visit;
 
 import lombok.*;
 import pl.sda.springtraining.web.validator.Hour;
+import pl.sda.springtraining.web.visit.model.UpdateVisitRq;
 
 import java.time.LocalDate;
 
@@ -11,11 +12,16 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Visit {
-
+    private Integer id;
     private String roomNumber;
+    private LocalDate visitDate;
     @Hour
     private int hour;
-    private LocalDate date;
-    private int patientId;
-    private int doctorId;
+    private int patient;
+    private int doctor;
+
+    public void updateVisit(UpdateVisitRq rq) {
+        this.visitDate = rq.getVisitDate();
+        this.hour = rq.getHour();
+    }
 }

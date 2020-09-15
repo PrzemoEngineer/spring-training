@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.springtraining.domain.visit.Visit;
 import pl.sda.springtraining.domain.visit.VisitService;
+import pl.sda.springtraining.web.visit.model.UpdateVisitRq;
 
 import javax.validation.Valid;
 
@@ -18,13 +19,11 @@ public class VisitEndpoint {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     void createVisit(@RequestBody @Valid Visit visit) {
-        visitService.create(visit);
+        visitService.scheduleVisit(visit);
     }
 
-//    {"roomNumber": "1",
-//    "visitDate" : "2020-09-10",
-//        hour
-//        patient
-//        doctor
-//    }
+    @PutMapping
+    void updateVisit(@RequestBody UpdateVisitRq rq) {
+        visitService.updateVisit(rq);
+    }
 }
